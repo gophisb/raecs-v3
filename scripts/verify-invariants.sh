@@ -37,7 +37,9 @@ else skip "INV-U001 (no package.json)"; fi
 PATTERNS='(API_KEY|SECRET_KEY|PRIVATE_KEY|ACCESS_TOKEN|AUTH_TOKEN|DATABASE_URL|PASSWORD|TOKEN)[[:space:]]*='
 SECRET_HIT=0
 if git diff --cached --unified=0 2>/dev/null | grep -Eiq "$PATTERNS"; then SECRET_HIT=1; fi
-if git ls-files --others --exclude-standard -z 2>/dev/null | xargs -0r grep -EIlq "$PATTERNS" 2>/dev/null; then SECRET_HIT=1; fi
+while IFS= read -r -d '' file; do
+  if grep -EIlq "$PATTERNS" "$file" 2>/dev/null; then SECRET_HIT=1; break; fi
+done < <(git ls-files --others --exclude-standard -z 2>/dev/null)
 if [[ -f .env ]] && ! git check-ignore -q .env 2>/dev/null; then
   violate "INV-U004" ".env is not gitignored → DEFCON 1 — immediate escalation required"
   SECRET_HIT=1
