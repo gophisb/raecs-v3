@@ -73,6 +73,7 @@ quality:
     - "health"
   required_before_release:
     - "policy validation"
+    - "security scan"
     - "invariants"
     - "health"
     - "release gate"

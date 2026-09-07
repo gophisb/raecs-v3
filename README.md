@@ -13,6 +13,7 @@ RAECS is an engineering-governance baseline for AI agents. Its purpose is not to
 ```bash
 bash scripts/validate-policy.sh
 bash scripts/health-check.sh
+bash scripts/security-scan.sh --report
 bash scripts/verify-invariants.sh --report
 ```
 
@@ -30,6 +31,7 @@ For an application repository, run the same gates from the repository root after
 - `OPLOG/` — operational audit trail.
 - `EVALS/` — release evidence.
 - `scripts/` — repeatable enforcement gates.
+- `scripts/security-scan.sh` — scans for hidden files, unapproved executables, hooks, persistence artifacts, and high-risk commands.
 
 ## Safety model
 

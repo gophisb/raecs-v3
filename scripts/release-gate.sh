@@ -8,9 +8,11 @@ echo "1/4 policy validation"
 bash scripts/validate-policy.sh
 echo "2/4 health"
 bash scripts/health-check.sh
-echo "3/4 invariants"
+echo "3/5 security scan"
+bash scripts/security-scan.sh --report
+echo "4/5 invariants"
 bash scripts/verify-invariants.sh --report
-echo "4/4 governance consistency"
+echo "5/5 governance consistency"
 python3 - <<'PY'
 from pathlib import Path
 required = ["AGENTS.md","INVARIANTS.md","RAECS_POLICY.yaml","PROJECT_STATE.md","TASK_LEDGER.md","ARCHITECTURE.md","RUNBOOK.md","CHANGELOG.md"]

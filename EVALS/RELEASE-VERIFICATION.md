@@ -8,6 +8,7 @@
 
 - `bash -n scripts/*.sh` — PASS
 - `bash scripts/validate-policy.sh` — PASS
+- `bash scripts/security-scan.sh --report` — PASS
 - `bash scripts/health-check.sh` — PASS
 - `bash scripts/release-gate.sh` — PASS
 

@@ -12,6 +12,7 @@ These are system properties, not suggestions. A failed mandatory invariant block
 | INV-G001 | `RAECS_POLICY.yaml` must validate when present. | verify-invariants | DEFCON-2 |
 | INV-G002 | Required governance files must exist in a release baseline. | release gate | DEFCON-2 |
 | INV-G003 | Governance files are human-controlled and protected from autonomous modification. | policy/review | DEFCON-1 |
+| INV-S001 | Repository changes must not introduce unapproved hidden files, executables, hooks, persistence artifacts, or high-risk execution patterns. | security-scan | DEFCON-1 |
 
 ## Violation protocol
 1. Stop the affected operation.
