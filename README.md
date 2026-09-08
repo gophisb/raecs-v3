@@ -15,6 +15,8 @@ bash scripts/validate-policy.sh
 bash scripts/health-check.sh
 bash scripts/security-scan.sh --report
 bash scripts/intent-check.sh
+bash scripts/permissions-check.sh
+bash scripts/status-report.sh
 bash scripts/dependency-audit.sh
 bash scripts/consensus-gate.sh
 bash scripts/evidence-chain.sh verify
@@ -43,6 +45,11 @@ For an application repository, run the same gates from the repository root after
 - `scripts/git-integrity.sh` — checks hooks, protected governance changes, and diff integrity.
 - `scripts/consensus-gate.sh` — requires independent security, Git, and static-analysis controls to agree.
 - `scripts/evidence-chain.sh` — maintains a tamper-evident local hash chain for evidence records.
+- `scripts/sandbox-exec.sh` — fail-closed Linux namespace wrapper with network disabled by default.
+- `scripts/artifact-sign.sh` — creates SHA-256 manifests and optionally GPG-signs artifacts.
+- `RAECS_ROLES.yaml` and `scripts/permissions-check.sh` — centralized roles and separation-of-duties rules.
+- `scripts/status-report.sh` — prints a local operational status report.
+- `scripts/evidence-export.sh` — creates a portable, hashed evidence bundle without application secrets by default.
 
 The advanced controls are deliberately honest about their boundary. Intent manifests validate declared scope but cannot read an agent's mind; local evidence chains detect later tampering but are not a distributed notarization service; consensus combines independent local gates but is not three independent security experts; and static analysis cannot prove the absence of every zero-day. Production or military use additionally requires isolated execution, signed artifacts, protected branches, external key management, network controls, incident response, redundancy, and formal certification.
 

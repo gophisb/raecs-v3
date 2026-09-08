@@ -11,6 +11,10 @@
 - `bash scripts/security-scan.sh --report` — PASS
 - `bash scripts/secrets-audit.sh` — PASS (external scanners optional until installed)
 - `bash scripts/intent-check.sh` — PASS
+- `bash scripts/permissions-check.sh` — PASS
+- `bash scripts/sandbox-preflight.sh` — PASS
+- `bash scripts/artifact-integrity.sh` — PASS
+- `bash scripts/status-report.sh` — PASS
 - `bash scripts/dependency-audit.sh` — PASS (no application manifest in baseline)
 - `bash scripts/consensus-gate.sh` — PASS
 - `bash scripts/evidence-chain.sh verify` — PASS (chain not initialized in baseline)
