@@ -4,15 +4,23 @@ set -euo pipefail
 ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 echo "RAECS v3.0 RELEASE GATE"
-echo "1/4 policy validation"
+echo "1/9 policy validation"
 bash scripts/validate-policy.sh
-echo "2/4 health"
+echo "2/9 health"
 bash scripts/health-check.sh
-echo "3/5 security scan"
-bash scripts/security-scan.sh --report
-echo "4/5 invariants"
+echo "3/9 intent validation"
+bash scripts/intent-check.sh
+echo "4/9 deep secret audit"
+bash scripts/secrets-audit.sh
+echo "5/9 dependency audit"
+bash scripts/dependency-audit.sh
+echo "6/9 triple consensus"
+bash scripts/consensus-gate.sh
+echo "7/9 invariants"
 bash scripts/verify-invariants.sh --report
-echo "5/5 governance consistency"
+echo "8/9 evidence chain"
+bash scripts/evidence-chain.sh verify
+echo "9/9 governance consistency"
 python3 - <<'PY'
 from pathlib import Path
 required = ["AGENTS.md","INVARIANTS.md","RAECS_POLICY.yaml","PROJECT_STATE.md","TASK_LEDGER.md","ARCHITECTURE.md","RUNBOOK.md","CHANGELOG.md"]

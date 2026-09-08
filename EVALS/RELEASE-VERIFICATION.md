@@ -9,6 +9,11 @@
 - `bash -n scripts/*.sh` — PASS
 - `bash scripts/validate-policy.sh` — PASS
 - `bash scripts/security-scan.sh --report` — PASS
+- `bash scripts/secrets-audit.sh` — PASS (external scanners optional until installed)
+- `bash scripts/intent-check.sh` — PASS
+- `bash scripts/dependency-audit.sh` — PASS (no application manifest in baseline)
+- `bash scripts/consensus-gate.sh` — PASS
+- `bash scripts/evidence-chain.sh verify` — PASS (chain not initialized in baseline)
 - `bash scripts/health-check.sh` — PASS
 - `bash scripts/release-gate.sh` — PASS
 

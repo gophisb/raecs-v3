@@ -14,12 +14,15 @@ done
 TIMESTAMP=$(date -u '+%Y-%m-%dT%H:%M:%SZ'); AGENT="${AGENT_NAME:-agent}"
 
 echo "RAECS CHECKPOINT: $TASK_ID"
-echo "1/4 invariants"; bash scripts/verify-invariants.sh --quiet
-echo "2/4 health"; bash scripts/health-check.sh --quiet
+echo "1/6 security"; bash scripts/security-scan.sh --quiet
+echo "2/6 consensus"; bash scripts/consensus-gate.sh
+echo "3/6 invariants"; bash scripts/verify-invariants.sh --quiet
+echo "4/6 health"; bash scripts/health-check.sh --quiet
 BRANCH=$(git branch --show-current 2>/dev/null || echo unknown)
 BEFORE=$(git rev-parse --short HEAD 2>/dev/null || echo unknown)
 mkdir -p OPLOG
 printf '[%s] [DEFCON-%s] [%s] [%s] [%s] %s — PASS\n' "$TIMESTAMP" "$DEFCON" "$AGENT" "$BEFORE" "$TASK_ID" "$DESCRIPTION" >> "OPLOG/$(date -u '+%Y-%m').log"
+bash scripts/evidence-chain.sh record
 if [[ -f PROJECT_STATE.md ]]; then
   printf '%s\n' "- [$TIMESTAMP] [$AGENT] [$BEFORE] [$TASK_ID] $DESCRIPTION — DEFCON-$DEFCON" >> PROJECT_STATE.md
 else
@@ -28,7 +31,7 @@ fi
 if [[ ! -f CHANGELOG.md ]]; then printf '# CHANGELOG\n\n' > CHANGELOG.md; fi
 TMP=$(mktemp); { head -n 2 CHANGELOG.md; printf '%s\n' "- [$TIMESTAMP] [$TASK_ID] $DESCRIPTION"; tail -n +3 CHANGELOG.md; } > "$TMP"; mv "$TMP" CHANGELOG.md
 
-echo "3/4 commit"
+echo "5/6 commit"
 git add -A
 if git diff --cached --quiet; then
   AFTER=$(git rev-parse --short HEAD 2>/dev/null || echo unknown)
@@ -37,5 +40,5 @@ else
   git commit -m "checkpoint($TASK_ID): $DESCRIPTION" -m "RAECS Checkpoint Agent: $AGENT" -m "Timestamp: $TIMESTAMP" -m "Health: PASS" -m "Invariants: PASS" -m "DEFCON: $DEFCON"
   AFTER=$(git rev-parse --short HEAD)
 fi
-echo "4/4 result"
+echo "6/6 result"
 echo "CHECKPOINT PASS | task=$TASK_ID | commit=$AFTER | branch=$BRANCH"

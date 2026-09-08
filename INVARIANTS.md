@@ -13,6 +13,8 @@ These are system properties, not suggestions. A failed mandatory invariant block
 | INV-G002 | Required governance files must exist in a release baseline. | release gate | DEFCON-2 |
 | INV-G003 | Governance files are human-controlled and protected from autonomous modification. | policy/review | DEFCON-1 |
 | INV-S001 | Repository changes must not introduce unapproved hidden files, executables, hooks, persistence artifacts, or high-risk execution patterns. | security-scan | DEFCON-1 |
+| INV-S002 | Release evidence must have a valid local tamper-evident chain when initialized. | evidence-chain | DEFCON-2 |
+| INV-S003 | Declared task intent must include purpose, scope, forbidden actions, and approval boundaries. | intent-check | DEFCON-2 |
 
 ## Violation protocol
 1. Stop the affected operation.

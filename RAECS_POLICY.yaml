@@ -73,7 +73,13 @@ quality:
     - "health"
   required_before_release:
     - "policy validation"
+    - "intent validation"
     - "security scan"
+    - "dependency audit"
+    - "static analysis"
+    - "Git integrity"
+    - "triple consensus"
+    - "evidence chain"
     - "invariants"
     - "health"
     - "release gate"

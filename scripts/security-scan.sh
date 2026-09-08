@@ -31,6 +31,10 @@ finding() {
 mapfile -d '' paths < <({ git ls-files -z; git ls-files --others --exclude-standard -z; } | sort -zu)
 
 allowed_hidden='^(\.github(/|$)|\.gitignore$|\.gitattributes$|\.editorconfig$|\.nojekyll$|.*\/\.gitkeep$)$'
+allowlist_file="RAECS_EXECUTABLES_ALLOWLIST.txt"
+if [[ ! -f "$allowlist_file" ]]; then
+  finding "ALLOWLIST" "$allowlist_file" "executable allowlist is missing"
+fi
 for path in "${paths[@]}"; do
   [[ "$path" == .git/* ]] && continue
   base="${path##*/}"
@@ -43,8 +47,10 @@ for path in "${paths[@]}"; do
       /*|../*|*/../*) finding "SYMLINK" "$path" "link may escape the repository root" ;;
     esac
   fi
-  if [[ -f "$path" && -x "$path" && "$path" != scripts/* ]]; then
-    finding "UNAPPROVED_EXECUTABLE" "$path" "executable file is outside the approved scripts/ directory"
+  if [[ -f "$path" && -x "$path" ]]; then
+    if [[ ! -f "$allowlist_file" ]] || ! grep -Fxq "$path" "$allowlist_file"; then
+      finding "UNAPPROVED_EXECUTABLE" "$path" "executable file is not on the approved allowlist"
+    fi
   fi
   if [[ "$path" == .git/hooks/* || "$path" == */.git/hooks/* ]]; then
     finding "GIT_HOOK" "$path" "Git hook can execute code implicitly"
