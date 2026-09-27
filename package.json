@@ -1,0 +1,7 @@
+{
+  "name": "raecs-adversarial-test",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "node -e \"process.exit(1)\""
+  }
+}
