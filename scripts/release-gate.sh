@@ -26,11 +26,15 @@ echo "10/14 triple consensus"
 bash scripts/consensus-gate.sh
 echo "11/14 invariants"
 bash scripts/verify-invariants.sh --report
-echo "12/14 evidence chain"
+echo "12/16 objective evidence"
+bash scripts/objective-evidence.sh
+echo "13/16 objective evidence verification"
+bash scripts/verify-objective-evidence.sh
+echo "14/16 evidence chain"
 bash scripts/evidence-chain.sh verify
-echo "13/14 status report"
+echo "15/16 status report"
 bash scripts/status-report.sh
-echo "14/14 governance consistency"
+echo "16/16 governance consistency"
 python3 - <<'PY'
 from pathlib import Path
 required = ["AGENTS.md","INVARIANTS.md","RAECS_POLICY.yaml","RAECS_INTENT.yaml","RAECS_ROLES.yaml","RAECS_EXECUTABLES_ALLOWLIST.txt","PROJECT_STATE.md","TASK_LEDGER.md","ARCHITECTURE.md","RUNBOOK.md","CHANGELOG.md"]
