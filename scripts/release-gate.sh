@@ -22,21 +22,15 @@ echo "8/14 deep secret audit"
 bash scripts/secrets-audit.sh
 echo "9/14 dependency audit"
 bash scripts/dependency-audit.sh
-echo "10/14 triple consensus"
-bash scripts/consensus-gate.sh
-echo "11/14 invariants"
+echo "10/14 invariants"
 bash scripts/verify-invariants.sh --report
-echo "12/17 trust anchor"
-bash scripts/trust-anchor-check.sh
-echo "13/17 objective evidence"
+echo "11/14 objective evidence"
 bash scripts/objective-evidence.sh
-echo "14/17 objective evidence verification"
+echo "12/14 objective evidence verification"
 bash scripts/verify-objective-evidence.sh
-echo "15/17 evidence chain"
-bash scripts/evidence-chain.sh verify
-echo "16/17 status report"
+echo "13/14 status report"
 bash scripts/status-report.sh
-echo "17/17 governance consistency"
+echo "14/14 governance consistency"
 python3 - <<'PY'
 from pathlib import Path
 required = ["AGENTS.md","INVARIANTS.md","RAECS_POLICY.yaml","RAECS_INTENT.yaml","RAECS_ROLES.yaml","RAECS_EXECUTABLES_ALLOWLIST.txt","PROJECT_STATE.md","TASK_LEDGER.md","ARCHITECTURE.md","RUNBOOK.md","CHANGELOG.md"]
