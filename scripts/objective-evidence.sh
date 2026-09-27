@@ -6,8 +6,9 @@ mkdir -p EVALS
 BASELINE="$(git rev-parse HEAD)"
 TIMESTAMP="$(date -u '+%Y-%m-%dT%H:%M:%SZ')"
 EVIDENCE="EVALS/OBJECTIVE_EVIDENCE.txt"
-RUNLOG="$(mktemp)"
-trap 'rm -f "$RUNLOG"' EXIT
+RUNLOG="EVALS/VERIFICATION_LOG.txt"
+
+: > "$RUNLOG"
 run_check() {
   local id="$1" cmd="$2"
   printf '### %s\n$ %s\n' "$id" "$cmd" >> "$RUNLOG"
