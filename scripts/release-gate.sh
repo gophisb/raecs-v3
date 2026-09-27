@@ -4,31 +4,33 @@ set -euo pipefail
 ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 echo "RAECS v3.0 RELEASE GATE"
-echo "1/13 policy validation"
+echo "1/14 requirements traceability"
+bash scripts/requirements-check.sh
+echo "2/14 policy validation"
 bash scripts/validate-policy.sh
-echo "2/13 health"
+echo "3/14 health"
 bash scripts/health-check.sh
-echo "3/13 intent validation"
+echo "4/14 intent validation"
 bash scripts/intent-check.sh
-echo "4/13 permissions validation"
+echo "5/14 permissions validation"
 bash scripts/permissions-check.sh
-echo "5/13 sandbox preflight"
+echo "6/14 sandbox preflight"
 bash scripts/sandbox-preflight.sh
-echo "6/13 artifact integrity"
+echo "7/14 artifact integrity"
 bash scripts/artifact-integrity.sh
-echo "7/13 deep secret audit"
+echo "8/14 deep secret audit"
 bash scripts/secrets-audit.sh
-echo "8/13 dependency audit"
+echo "9/14 dependency audit"
 bash scripts/dependency-audit.sh
-echo "9/13 triple consensus"
+echo "10/14 triple consensus"
 bash scripts/consensus-gate.sh
-echo "10/13 invariants"
+echo "11/14 invariants"
 bash scripts/verify-invariants.sh --report
-echo "11/13 evidence chain"
+echo "12/14 evidence chain"
 bash scripts/evidence-chain.sh verify
-echo "12/13 status report"
+echo "13/14 status report"
 bash scripts/status-report.sh
-echo "13/13 governance consistency"
+echo "14/14 governance consistency"
 python3 - <<'PY'
 from pathlib import Path
 required = ["AGENTS.md","INVARIANTS.md","RAECS_POLICY.yaml","RAECS_INTENT.yaml","RAECS_ROLES.yaml","RAECS_EXECUTABLES_ALLOWLIST.txt","PROJECT_STATE.md","TASK_LEDGER.md","ARCHITECTURE.md","RUNBOOK.md","CHANGELOG.md"]
