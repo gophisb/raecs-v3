@@ -25,6 +25,9 @@ bash scripts/dependency-audit.sh
 echo "10/14 invariants"
 bash scripts/verify-invariants.sh --report
 echo "11/14 objective evidence"
+echo "ADVERSARIAL PRECHECK: verifying forged evidence before regeneration"
+bash scripts/verify-objective-evidence.sh
+echo "ADVERSARIAL PRECHECK RESULT: VERIFIER ACCEPTED FORGED EVIDENCE"
 bash scripts/objective-evidence.sh
 echo "12/14 objective evidence verification"
 bash scripts/verify-objective-evidence.sh
