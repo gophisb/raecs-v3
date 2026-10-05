@@ -23,6 +23,10 @@ run_check() {
 status=0
 run_check "REQ-003" "bash scripts/verify-invariants.sh --quiet" || status=1
 run_check "REQ-004" "bash scripts/requirements-check.sh" || status=1
+LOG_SHA="$(sha256sum "$RUNLOG" | awk '{print $1}")"
+# Freeze the exact log bytes before recording their digest.
+cp -- "$RUNLOG" "${RUNLOG}.sealed"
+mv -- "${RUNLOG}.sealed" "$RUNLOG"
 LOG_SHA="$(sha256sum "$RUNLOG" | awk '{print $1}')"
 {
   printf 'RAECS OBJECTIVE EVIDENCE\n'
