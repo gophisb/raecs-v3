@@ -34,7 +34,7 @@ LOG_SHA="$(sha256sum "$RUNLOG" | awk '{print $1}')"
   printf 'baseline_commit=%s\n' "$BASELINE"
   printf 'verification_log_sha256=%s\n' "$LOG_SHA"
   printf 'checks=REQ-003,REQ-004\n'
-  printf 'result=%s\n' "$([[ "$status" -eq 0 ]] && echo PASS || echo FAIL)"
+  if [[ "$status" -eq 0 ]]; then\n    result="PASS"\n  else\n    result="FAIL"\n  fi\n  printf 'result=%s\n' "$result"
 } > "$EVIDENCE"
 cat "$RUNLOG"
 cat "$EVIDENCE"
