@@ -6,8 +6,8 @@ RAECS uses explicit task IDs to keep agent work bounded and auditable.
 |---|---|---|---|---|
 | RAECS-300 | Establish v3.0 governance baseline | DONE | human/agent | repository baseline |
 | RAECS-301 | Harden verification scripts | DONE | agent | `scripts/` |
-| RAECS-302 | Run release verification | PENDING | release operator | `EVALS/` |
-| GOV-V3-001 | Establish executable Constitution V3 | IMPLEMENTED | human/agent | branch `feat/constitution-v3`; validation pending |
+| RAECS-302 | Run release verification | TESTED | release operator | `EVALS/`; GitHub Actions Run #80 |
+| GOV-V3-001 | Establish executable Constitution V3 | PROVEN | human/agent | Run #80 15/15 PASS; independent review; checkpoint `b49bee1ad9fd69a2b4ee7f1728400f0522b62fd9` |
 
 ## GOV-V3-001 Contract
 
