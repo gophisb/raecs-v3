@@ -12,7 +12,7 @@ for f in RAFEEQ_CONSTITUTION.md RAECS_POLICY.yaml RAECS_INTENT.yaml AGENTS.md IN
 done
 
 grep -q '^# RAFEEQ ENGINEERING CONSTITUTION V3$' RAFEEQ_CONSTITUTION.md || fail "constitution header missing"
-grep -q 'No evidence = no completion claim' RAFEEQ_CONSTITUTION.md || fail "evidence rule missing"
+grep -q 'No evidence means no completion claim' RAFEEQ_CONSTITUTION.md || fail "evidence rule missing"
 grep -q 'INSPECT → UNDERSTAND → MAP → PLAN → CHANGE' RAFEEQ_CONSTITUTION.md || fail "inspect-before-modify rule missing"
 grep -q 'CIRCUIT BREAKER' RAFEEQ_CONSTITUTION.md || fail "circuit breaker rule missing"
 grep -q 'The agent must not autonomously alter' RAFEEQ_CONSTITUTION.md || fail "self-protection rule missing"
