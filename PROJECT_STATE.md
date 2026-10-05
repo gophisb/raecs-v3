@@ -1,28 +1,47 @@
 # RAECS Project State
 
-status: FINAL
-version: 3.0.0
-baseline: engineering-governance
-last_verified: 2026-09-07
+status: PROVEN
+version: 3.1.0
+baseline: RAFEEQ ENGINEERING CONSTITUTION V3
+last_verified: 2026-10-05T09:44:31Z
 
 ## Current objective
-Maintain a stable, auditable governance baseline for autonomous engineering agents.
+Establish an executable Constitution V3 without weakening the existing RAECS security baseline.
+
+## Current task
+GOV-V3-001
+
+## Current branch
+feat/constitution-v3
+
+## Last verified commit
+a0210e0272d05ccb59a4751ce1aa0f6b2cba49bc
+
+## Build status
+UNKNOWN — no build claim is made by this governance task.
+
+## Test status
+PASS — GitHub Actions Run #80 passed all 15 release-gate checks.
 
 ## System posture
-- Governance files present.
-- Verification scripts are fail-closed for mandatory validation errors.
-- No application build is assumed; application-specific gates activate when application artifacts exist.
-- Governance changes require human approval.
+- Existing RAECS v3 governance is preserved as the baseline.
+- Constitution V3 is being introduced on an isolated branch.
+- Governance changes are explicitly human-approved for this task.
+- No application functionality is changed by this task.
 
-## Operational log
-<!-- checkpoint.sh appends entries below -->
+## Known risks
+- No unresolved critical governance defect identified in the independent review.
+- Build/runtime claims are intentionally out of scope for this governance task.
 
-## SLO metrics
-- mission_success_rate: not_measured
-- regression_rate: not_measured
-- scope_violations: not_measured
-- invariant_violations: not_measured
+## Active decisions
+- V3 is constitution + machine policy + persistent state + task ledger + invariants + executable gates + evidence + recovery.
+- Governance files remain protected from autonomous modification outside an explicitly approved governance change.
 
-## Release evidence
-See `EVALS/` and `OPLOG/` for verification records.
-- [2026-09-07T18:57:49Z] [agent] [unknown] [RAECS-SMOKE] release baseline smoke test — DEFCON-5
+## Blocked tasks
+- None for GOV-V3-001. Merge/release remains a human-owned approval decision.
+
+## Next recommended task
+Human review of PR #5 and explicit merge/release decision.
+
+## Last checkpoint
+GOV-V3-001 verified at a0210e0272d05ccb59a4751ce1aa0f6b2cba49bc after independent scope/governance review and GitHub Actions Run #80 (15/15 PASS).
