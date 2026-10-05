@@ -1,28 +1,48 @@
 # RAECS Project State
 
-status: FINAL
-version: 3.0.0
-baseline: engineering-governance
-last_verified: 2026-09-07
+status: IMPLEMENTATION
+version: 3.1.0
+baseline: RAFEEQ ENGINEERING CONSTITUTION V3
+last_verified: UNKNOWN
 
 ## Current objective
-Maintain a stable, auditable governance baseline for autonomous engineering agents.
+Establish an executable Constitution V3 without weakening the existing RAECS security baseline.
+
+## Current task
+GOV-V3-001
+
+## Current branch
+feat/constitution-v3
+
+## Last verified commit
+8e1292d33dc8e6f9332e5b0bca636a88658a7c60
+
+## Build status
+UNKNOWN — no build claim is made by this governance task.
+
+## Test status
+PENDING — Constitution V3 validator must run before release.
 
 ## System posture
-- Governance files present.
-- Verification scripts are fail-closed for mandatory validation errors.
-- No application build is assumed; application-specific gates activate when application artifacts exist.
-- Governance changes require human approval.
+- Existing RAECS v3 governance is preserved as the baseline.
+- Constitution V3 is being introduced on an isolated branch.
+- Governance changes are explicitly human-approved for this task.
+- No application functionality is changed by this task.
 
-## Operational log
-<!-- checkpoint.sh appends entries below -->
+## Known risks
+- Existing governance scripts may not yet enforce every V3 rule.
+- YAML policy semantics require deterministic validation.
+- Final release requires independent review and evidence.
 
-## SLO metrics
-- mission_success_rate: not_measured
-- regression_rate: not_measured
-- scope_violations: not_measured
-- invariant_violations: not_measured
+## Active decisions
+- V3 is constitution + machine policy + persistent state + task ledger + invariants + executable gates + evidence + recovery.
+- Governance files remain protected from autonomous modification outside an explicitly approved governance change.
 
-## Release evidence
-See `EVALS/` and `OPLOG/` for verification records.
-- [2026-09-07T18:57:49Z] [agent] [unknown] [RAECS-SMOKE] release baseline smoke test — DEFCON-5
+## Blocked tasks
+- Merge/release of V3 until validation and review evidence pass.
+
+## Next recommended task
+Run `bash scripts/validate-constitution.sh`, inspect the diff, then perform independent governance review.
+
+## Last checkpoint
+Branch created from main at 8e1292d33dc8e6f9332e5b0bca636a88658a7c60.
