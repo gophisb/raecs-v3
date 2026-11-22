@@ -16,11 +16,11 @@ bash scripts/health-check.sh
 bash scripts/security-scan.sh --report
 bash scripts/intent-check.sh
 bash scripts/permissions-check.sh
-bash scripts/status-report.sh
 bash scripts/dependency-audit.sh
-bash scripts/consensus-gate.sh
-bash scripts/evidence-chain.sh verify
+bash scripts/static-analysis.sh
+bash scripts/git-integrity.sh
 bash scripts/verify-invariants.sh --report
+bash scripts/release-gate.sh
 ```
 
 For an application repository, run the same gates from the repository root after integrating the `scripts/` and governance files.
@@ -43,15 +43,16 @@ For an application repository, run the same gates from the repository root after
 - `scripts/dependency-audit.sh` — audits supported application dependencies when manifests exist.
 - `scripts/static-analysis.sh` — runs ShellCheck, Bandit, or Semgrep when applicable and available.
 - `scripts/git-integrity.sh` — checks hooks, protected governance changes, and diff integrity.
-- `scripts/consensus-gate.sh` — requires independent security, Git, and static-analysis controls to agree.
-- `scripts/evidence-chain.sh` — maintains a tamper-evident local hash chain for evidence records.
+- `scripts/change-impact.sh <base-ref>` — read-only changed-path inventory and heuristic verification hints; not a substitute for the required pre-edit impact map.
+- `SKILLS/engineering-change/SKILL.md` — mandatory reconnaissance, impact analysis, regression selection, evidence, and review lifecycle.
+- `scripts/verify-objective-evidence.sh` — validates the recorded objective evidence and its commit/hash linkage.
 - `scripts/sandbox-exec.sh` — fail-closed Linux namespace wrapper with network disabled by default.
 - `scripts/artifact-sign.sh` — creates SHA-256 manifests and optionally GPG-signs artifacts.
 - `RAECS_ROLES.yaml` and `scripts/permissions-check.sh` — centralized roles and separation-of-duties rules.
 - `scripts/status-report.sh` — prints a local operational status report.
 - `scripts/evidence-export.sh` — creates a portable, hashed evidence bundle without application secrets by default.
 
-The advanced controls are deliberately honest about their boundary. Intent manifests validate declared scope but cannot read an agent's mind; local evidence chains detect later tampering but are not a distributed notarization service; consensus combines independent local gates but is not three independent security experts; and static analysis cannot prove the absence of every zero-day. Production or military use additionally requires isolated execution, signed artifacts, protected branches, external key management, network controls, incident response, redundancy, and formal certification.
+The controls are deliberately honest about their boundary. The current mainline policy and documentation still refer to consensus and evidence-chain controls that are not present as executable scripts, and the release gate does not yet enforce every item listed under policy. Treat release readiness as BLOCKED until that policy-to-implementation gap is reconciled and the full gate is executed on the target commit. The change-impact inventory is heuristic; it cannot discover every runtime dependency or prove test sufficiency. Production use additionally requires protected branches, external key management, network controls, incident response, redundancy, and any applicable formal assurance.
 
 ## Safety model
 
