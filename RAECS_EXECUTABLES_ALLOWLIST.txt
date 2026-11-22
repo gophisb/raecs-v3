@@ -2,9 +2,7 @@ scripts/aar.sh
 scripts/artifact-sign.sh
 scripts/artifact-integrity.sh
 scripts/checkpoint.sh
-scripts/consensus-gate.sh
 scripts/dependency-audit.sh
-scripts/evidence-chain.sh
 scripts/evidence-export.sh
 scripts/git-integrity.sh
 scripts/health-check.sh
