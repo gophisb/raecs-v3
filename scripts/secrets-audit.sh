@@ -1,26 +1,32 @@
 #!/usr/bin/env bash
-# RAECS deep secret audit using gitleaks/trufflehog when installed.
+# RAECS deep secret audit. At least one independent scanner is mandatory.
 set -euo pipefail
 ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
+scanners=0
 findings=0
+
 if command -v gitleaks >/dev/null 2>&1; then
+  scanners=$((scanners+1))
   if gitleaks detect --no-banner --redact --source .; then
     echo '  ✓ gitleaks passed'
   else
-    echo '  ✗ gitleaks detected a secret'; findings=$((findings+1))
+    echo '  ✗ gitleaks detected a secret or could not complete'; findings=$((findings+1))
   fi
-else
-  echo '  – gitleaks unavailable; install it in CI for deep secret scanning'
 fi
+
 if command -v trufflehog >/dev/null 2>&1; then
+  scanners=$((scanners+1))
   if trufflehog filesystem --directory . --no-update --fail; then
     echo '  ✓ trufflehog passed'
   else
-    echo '  ✗ trufflehog detected a secret'; findings=$((findings+1))
+    echo '  ✗ trufflehog detected a secret or could not complete'; findings=$((findings+1))
   fi
-else
-  echo '  – trufflehog unavailable; install it in CI for deep secret scanning'
+fi
+
+if ((scanners == 0)); then
+  echo '  ✗ no deep secret scanner is installed; refusing to report PASS' >&2
+  exit 1
 fi
 if ((findings)); then exit 1; fi
-echo '  ✓ deep secret audit passed'
+printf '  ✓ deep secret audit passed (%s scanner(s) executed)\n' "$scanners"
