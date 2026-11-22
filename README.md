@@ -1,4 +1,4 @@
-# RAECS v3.0
+# RAECS v3.1
 
 **Rafeeq Autonomous Engineering Command System**
 
@@ -52,7 +52,7 @@ For an application repository, run the same gates from the repository root after
 - `scripts/status-report.sh` — prints a local operational status report.
 - `scripts/evidence-export.sh` — creates a portable, hashed evidence bundle without application secrets by default.
 
-The controls are deliberately honest about their boundary. The current mainline policy and documentation still refer to consensus and evidence-chain controls that are not present as executable scripts, and the release gate does not yet enforce every item listed under policy. Treat release readiness as BLOCKED until that policy-to-implementation gap is reconciled and the full gate is executed on the target commit. The change-impact inventory is heuristic; it cannot discover every runtime dependency or prove test sufficiency. Production use additionally requires protected branches, external key management, network controls, incident response, redundancy, and any applicable formal assurance.
+The v3.1 policy removes the unsupported triple-consensus claim and names objective-evidence verification explicitly. The release gate invokes the repository security scan, static analysis, and Git-integrity checks as well as the existing controls. Objective evidence currently covers REQ-003 and REQ-004 only; this is not full eight-requirement traceability or a tamper-proof evidence chain. A successful gate means only that the checks actually invoked passed on the tested commit. The change-impact inventory is heuristic; it cannot discover every runtime dependency or prove test sufficiency. Production use additionally requires protected branches, independent human review, external key management, network controls, incident response, redundancy, and any applicable formal assurance.
 
 ## Safety model
 
