@@ -40,10 +40,23 @@ for key in ("always_forbidden_files","forbidden_content","secret_handling","repo
 for f in ("AGENTS.md","INVARIANTS.md","RAECS_POLICY.yaml",".env"):
     if f not in security["always_forbidden_files"]:
         print(f"  Missing protected file: {f}", file=sys.stderr); sys.exit(1)
+quality = p["quality"]
+required_release = {
+    "policy validation", "intent validation", "permissions validation",
+    "sandbox preflight", "artifact integrity", "security scan",
+    "deep secret audit", "dependency audit", "static analysis",
+    "Git integrity", "objective evidence verification", "status report",
+    "invariants", "health", "release gate",
+}
+declared_release = set(quality.get("required_before_release", []))
+missing_controls = sorted(required_release - declared_release)
+if missing_controls:
+    print(f"  Missing required release controls: {missing_controls}", file=sys.stderr); sys.exit(1)
 governance = p["governance"]
 if governance.get("stop_the_line") is not True:
     print("  governance.stop_the_line must be true", file=sys.stderr); sys.exit(1)
 print("  Policy structure: VALID")
+print("  Required release controls: VALID")
 print("  Version: 3.1.0 | Status: final")
 print("  DEFCON levels: 1-5")
 PY
