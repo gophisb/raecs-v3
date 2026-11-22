@@ -1,4 +1,4 @@
-# RAECS v3.0 — Machine Policy
+# RAECS v3.1 — Machine Policy
 # Governance changes require ADR + human approval + version bump.
 version: "3.1.0"
 status: final
