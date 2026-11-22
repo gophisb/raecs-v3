@@ -1,7 +1,7 @@
 # ADR: Release-gate and policy alignment
 
 - Date: 2026-11-22
-- Status: Accepted
+- Status: Accepted — explicit human approval recorded
 - Scope: RAECS release-gate implementation and the corresponding machine policy
 - Approval record: EVALS/GOVERNANCE-APPROVAL.md
 
@@ -18,6 +18,7 @@ A control must not be represented as enforced merely because its name appears in
 3. Invoke the existing security scan, static analysis, and Git integrity checks from the release gate.
 4. Make static analysis fail when a relevant source domain exists but its required analyzer is unavailable; an unavailable analyzer must not silently produce a successful gate.
 5. Bump the policy version to 3.1.0 and keep its validator, release marker, and repository documentation aligned.
+6. Require at least one deep secret-scanning engine in the release environment; absence of all configured engines is a blocking condition.
 
 ## Consequences and limitations
 
@@ -29,4 +30,4 @@ A control must not be represented as enforced merely because its name appears in
 
 ## Verification
 
-The updated release gate and CI workflow must be run on the resulting commit. Any missing analyzer, failed scan, or inconsistent policy marker blocks acceptance.
+The updated release gate and CI workflow must be run on the resulting commit. Any missing analyzer, missing deep secret scanner, failed scan, or inconsistent policy marker blocks acceptance.
