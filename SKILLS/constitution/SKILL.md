@@ -15,3 +15,7 @@ Use this skill when an agent is asked to change project governance, agent permis
 - modify policy/agent rules autonomously;
 - claim evidence that was not generated;
 - expand permissions without explicit authorization.
+
+## Related execution skill
+
+For ordinary engineering changes, also follow `SKILLS/engineering-change/SKILL.md`. The constitution skill governs changes to RAECS itself; the engineering-change skill governs reconnaissance, impact mapping, minimal execution, regression selection, and evidence for project changes.
