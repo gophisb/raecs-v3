@@ -78,6 +78,7 @@ quality:
     - "sandbox preflight"
     - "artifact integrity"
     - "security scan"
+    - "deep secret audit"
     - "dependency audit"
     - "static analysis"
     - "Git integrity"
