@@ -10,5 +10,10 @@ printf 'commit: '; git rev-parse --short HEAD
 printf 'worktree: '; [[ -z "$(git status --porcelain)" ]] && echo clean || echo changes-present
 printf 'intent: '; bash scripts/intent-check.sh >/dev/null && echo valid
 printf 'roles: '; bash scripts/permissions-check.sh >/dev/null && echo valid
-printf 'evidence: '; bash scripts/evidence-chain.sh verify >/dev/null && echo valid-or-not-initialized
+if [[ -f EVALS/OBJECTIVE_EVIDENCE.txt && -f EVALS/VERIFICATION_LOG.txt ]]; then
+  printf 'objective-evidence: '
+  bash scripts/verify-objective-evidence.sh >/dev/null && echo valid
+else
+  printf '%s\n' 'objective-evidence: not-generated'
+fi
 printf 'last-oplog: '; find OPLOG -maxdepth 1 -type f -name '*.log' -printf '%T@ %p\n' | sort -nr | head -n1 | cut -d' ' -f2- || echo none
