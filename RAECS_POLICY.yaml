@@ -1,6 +1,6 @@
 # RAECS v3.0 — Machine Policy
 # Governance changes require ADR + human approval + version bump.
-version: "3.0.0"
+version: "3.1.0"
 status: final
 
 system:
@@ -81,8 +81,7 @@ quality:
     - "dependency audit"
     - "static analysis"
     - "Git integrity"
-    - "triple consensus"
-    - "evidence chain"
+    - "objective evidence verification"
     - "status report"
     - "invariants"
     - "health"
