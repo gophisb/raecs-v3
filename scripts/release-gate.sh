@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # RAECS v3.1 release gate — invoke every locally enforceable mandatory control.
 set -euo pipefail
-ROOT_DIR="$(cd -- "$(dirname -- "\${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 echo "RAECS v3.1 RELEASE GATE"
 echo "1/17 requirements traceability"
