@@ -11,7 +11,7 @@ if ((${#shell_files[@]})); then
   if command -v shellcheck >/dev/null 2>&1; then
     shellcheck "${shell_files[@]}" || fail "SHELLCHECK" "shellcheck reported issues"
   else
-    printf '  – shellcheck unavailable; CI must install it\n'
+    fail "SHELLCHECK_MISSING" "shellcheck is required when shell sources exist"
   fi
 else
   printf '  – shellcheck not applicable\n'
@@ -22,7 +22,7 @@ if ((${#python_files[@]})); then
   if command -v bandit >/dev/null 2>&1; then
     bandit -q -r "${python_files[@]}" || fail "BANDIT" "bandit reported issues"
   else
-    printf '  – bandit unavailable; CI must install it\n'
+    fail "BANDIT_MISSING" "bandit is required when Python sources exist"
   fi
 else
   printf '  – bandit not applicable\n'
@@ -32,7 +32,7 @@ if find . -path './.git' -prune -o -type f \( -name '*.js' -o -name '*.ts' -o -n
   if command -v semgrep >/dev/null 2>&1; then
     semgrep --config=p/security-audit --error --quiet . || fail "SEMGREP" "semgrep reported security findings"
   else
-    printf '  – semgrep unavailable; CI must install it\n'
+    fail "SEMGREP_MISSING" "semgrep is required when supported source files exist"
   fi
 else
   printf '  – semgrep not applicable\n'
