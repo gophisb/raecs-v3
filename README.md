@@ -14,6 +14,7 @@ RAECS is an engineering-governance baseline for AI agents. Its purpose is not to
 bash scripts/validate-policy.sh
 bash scripts/health-check.sh
 bash scripts/security-scan.sh --report
+bash scripts/secrets-audit.sh
 bash scripts/intent-check.sh
 bash scripts/permissions-check.sh
 bash scripts/dependency-audit.sh
@@ -41,7 +42,7 @@ For an application repository, run the same gates from the repository root after
 - `RAECS_INTENT.yaml` — records approved purpose, paths, forbidden actions, and human-approval boundaries.
 - `RAECS_EXECUTABLES_ALLOWLIST.txt` — explicit allowlist for executable files.
 - `scripts/dependency-audit.sh` — audits supported application dependencies when manifests exist.
-- `scripts/static-analysis.sh` — runs ShellCheck, Bandit, or Semgrep when applicable and available.
+- `scripts/static-analysis.sh` — requires and runs ShellCheck, Bandit, or Semgrep when matching source files exist; missing required analyzers block the gate.
 - `scripts/git-integrity.sh` — checks hooks, protected governance changes, and diff integrity.
 - `scripts/change-impact.sh <base-ref>` — read-only changed-path inventory and heuristic verification hints; not a substitute for the required pre-edit impact map.
 - `SKILLS/engineering-change/SKILL.md` — mandatory reconnaissance, impact analysis, regression selection, evidence, and review lifecycle.
@@ -52,7 +53,7 @@ For an application repository, run the same gates from the repository root after
 - `scripts/status-report.sh` — prints a local operational status report.
 - `scripts/evidence-export.sh` — creates a portable, hashed evidence bundle without application secrets by default.
 
-The v3.1 policy removes the unsupported triple-consensus claim and names objective-evidence verification explicitly. The release gate invokes the repository security scan, static analysis, and Git-integrity checks as well as the existing controls. Objective evidence currently covers REQ-003 and REQ-004 only; this is not full eight-requirement traceability or a tamper-proof evidence chain. A successful gate means only that the checks actually invoked passed on the tested commit. The change-impact inventory is heuristic; it cannot discover every runtime dependency or prove test sufficiency. Production use additionally requires protected branches, independent human review, external key management, network controls, incident response, redundancy, and any applicable formal assurance.
+The v3.1 policy removes the unsupported triple-consensus claim and names objective-evidence verification and deep secret auditing explicitly. The release gate invokes the repository security scan, deep secret scanner, static analysis, and Git-integrity checks as well as the existing controls. Objective evidence currently covers REQ-003 and REQ-004 only; this is not full eight-requirement traceability or a tamper-proof evidence chain. A successful gate means only that the checks actually invoked passed on the tested commit. The change-impact inventory is heuristic; it cannot discover every runtime dependency or prove test sufficiency. Production use additionally requires protected branches, independent human review, external key management, network controls, incident response, redundancy, and any applicable formal assurance.
 
 ## Safety model
 
